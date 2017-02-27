@@ -10,36 +10,10 @@
         
         <h:form>
            
-            
-                
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                        <h:outputText value="Login: *" />
-                        <p:inputText value="#{loginBean.login}" required="false" label="Login"/>
-
-                        <h:outputText value="Password: *" />
-                        <p:inputText value="#{loginBean.password}" required="false" label="Password"/>
-
-                        <br/>
-
-                        <h:commandButton value="Login" action="#{loginBean.doLogin()}" />
-
-                    </h:panelGrid>
-                
-                <p:tab title="Register">
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                        <h:outputText value="Login: *" />
-                        <p:inputText value="#{loginBean.newUserLogin}" required="false" label="Login"/>
-
-                        <h:outputText value="Password: *" />
-                        <p:inputText value="#{loginBean.newUserPassword}" required="false" label="Password"/>
-
-                        <h:outputText value="Confirm Password: " />
-                        <p:inputText value="#{loginBean.newUserConfirmPassword}" required="false" label="ConfirmPassword"/>
-
-                        <h:commandButton value="Create Account" action="#{loginBean.createNewAccount()}" />
-                         
-                    </h:panelGrid>
-                </p:tab>
+            <p>Username: <h:inputText value="#{login.username}" /></p>
+            <p>Password: <h:inputSecret value="#{login.password}" /></p>
+            <h:commandButton value="Login" action="#{login.login()}" />
+       
             
         </h:body>
     </h:form>
