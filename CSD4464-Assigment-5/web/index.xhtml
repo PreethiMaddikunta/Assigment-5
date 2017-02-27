@@ -1,11 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
  <html xmlns="http://www.w3.org/1999/xhtml"  
-      xmlns:h="http://java.sun.com/jsf/html"  
-      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:h="http://java.sun.com/jsf/html"    
       
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"> 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
  
  
  
@@ -16,98 +14,28 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     
-        
-        <nav class="navbar navbar-default navbar-fixed-top bg-grey">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a><h:form>
-
-                            <c:if test="#{loginBean.logged}">
-                                <h:outputText value="   WELCOME #{loginBean.login}"/>
-                            </c:if>
-                            <c:if test="#{!loginBean.logged}">
-                                <h:commandLink action="login">
-                                    <h:outputText value=" LOGIN"/>
-                                </h:commandLink>
-                            </c:if>
-                        </h:form></a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#author">SELECT BY AUTHOR</a></li>
-                        <li><a href="#posts">POSTS</a></li>
-                        <li><h:form>
-                                <c:if test="#{loginBean.logged}">
-                                    <h:link value ="MANAGE POSTS    " style="font-weight: bold" outcome="#{userControlPanelBean.obtainPostsFromUser()}"/>
-                                </c:if>
-                                <c:if test="#{!loginBean.logged}">
-                                    <h:commandLink action="login">
-                                        <h:outputText value=""/>
-                                    </h:commandLink>
-                                </c:if>
-                            </h:form></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-
-        <!-- Author -->
-        <div id="author" class="container-fluid text-center">
-            <h:form>
-                <p:panel header="Select Authors" style="margin-bottom:10px;">
-                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                        <p:outputLabel for="console" value="Console:" />
-                        <p:selectOneRadio id="console" value="#{indexBean.selectedAuthor}">
-                            <f:selectItems value="#{indexBean.authors}" />
-                        </p:selectOneRadio>
-                    </h:panelGrid>
-                        <h:commandButton value="Select" action="#{viewPostsFromOneUserBean.obtainPostsFromUser(indexBean.selectedAuthor)}"/>
-                </p:panel>
-            </h:form>
-        </div>     
-
-        <!--posts list -->
-        
-            
-            
-                <f:facet name="header">
-                    All posts
-                </f:facet>
-
-                
-                    <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
-                
-
-                
-                    
-                        
-                            <h:outputText value="Author:" />
-                            <h:outputText value="#{post.author}" style="font-weight: bold"/>
-                            <h:outputText value="Date:" />
-                            <h:outputText value="#{post.date}" style="font-weight: bold"/>
-                            <h:outputText value="" />
-                            <h:outputText value="" />
-                            <h:outputText value="" />   
-                            <h:commandLink action="#{viewPostBean.viewSinglePost(post)}" immediate="true">
-                            <h:outputText value="#{post.title}" style="font-weight: bold"/>
-                            </h:commandLink>
-
-                            <h:outputText value="" />
-                            <h:outputText value="#{post.content}"/>
-                            
-                            <h:commandButton value="View this post only" action="#{viewPostBean.viewSinglePost(post)}" />
-                            
-                            <h:outputText value="" />
-                            <p:separator />
-                            <p:separator />
-                        
+     <h:body>
+         <p> welcome to my blog </p>
+         
+         <h:form>
+            <h:dataTable value="#{posts.posts}" var="post">
+                <h:column>
+                    <h:commandLink action="#{posts.viewPost(post)}">#{post.title}</h:commandLink>
+                </h:column>
+                <h:column>
+                    #{users.getUsernameById(post.user_id)}
+                </h:column>
+                <h:column>
+                    #{post.createdTime.toLocaleString()}
+                </h:column>
+            </h:dataTable>
+            <c:if test="#{login.loggedIn}">
+                <h:commandButton value="Add New" action="#{posts.addPost()}" />
+            </c:if>
+            <c:if test="#{!login.loggedIn}">
+                <h:button value="Login" outcome="login" />
+            </c:if>
+        </h:form>
                     
        </h:body>
 </html>
