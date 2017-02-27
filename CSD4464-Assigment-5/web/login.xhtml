@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Login Page</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+           
+            
+                
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Login: *" />
+                        <p:inputText value="#{loginBean.login}" required="false" label="Login"/>
+
+                        <h:outputText value="Password: *" />
+                        <p:inputText value="#{loginBean.password}" required="false" label="Password"/>
+
+                        <br/>
+
+                        <h:commandButton value="Login" action="#{loginBean.doLogin()}" />
+
+                    </h:panelGrid>
+                
+                <p:tab title="Register">
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Login: *" />
+                        <p:inputText value="#{loginBean.newUserLogin}" required="false" label="Login"/>
+
+                        <h:outputText value="Password: *" />
+                        <p:inputText value="#{loginBean.newUserPassword}" required="false" label="Password"/>
+
+                        <h:outputText value="Confirm Password: " />
+                        <p:inputText value="#{loginBean.newUserConfirmPassword}" required="false" label="ConfirmPassword"/>
+
+                        <h:commandButton value="Create Account" action="#{loginBean.createNewAccount()}" />
+                         
+                    </h:panelGrid>
+                </p:tab>
+            
+        </h:body>
+    </h:form>
+        
+</html>
+
+
+       
+
